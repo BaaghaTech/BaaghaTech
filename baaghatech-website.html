@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="BaaghaTech designs and builds apps and software. Operated by DevCP LLC.">
+<title>BaaghaTech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: white page, sticky header, hash-routed pages in a 1120px column; color appears only as thin violet→blue lines, dots and the primary button */
+:root {
+  --bg: #FFFFFF;
+  --soft: #F8F9FC;
+  --fg: #161A33;
+  --muted: #646985;
+  --line: #E6E8F0;
+  --violet: #6347EA;
+  --blue: #2B63E8;
+  --grad: linear-gradient(90deg, #6347EA, #2B63E8);
+  --font: "IBM Plex Sans", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --radius: 8px;
+  --max: 1120px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { margin: 0; line-height: 1.2; font-weight: 600; text-wrap: balance; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2rem, 4.5vw, 3.1rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.5rem, 2.8vw, 2.1rem); }
+h3 { font-size: 1.0625rem; }
+p { margin: 0; }
+:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: var(--max); margin-inline: auto; padding-inline: 24px; }
+@media (max-width: 480px) { .wrap { padding-inline: 16px; } }
+
+.top-line { height: 3px; background: var(--grad); }
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--grad); }
+.lead { font-size: 1.125rem; color: var(--muted); max-width: 60ch; }
+.muted { color: var(--muted); }
+
+/* Header */
+.site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(255,255,255,.94); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.nav { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--fg); }
+.brand-name { font-weight: 700; font-size: 1.0625rem; letter-spacing: 0.04em; }
+.brand-name small { font-weight: 500; font-size: 0.75rem; color: var(--muted); margin-left: 5px; }
+.nav-links { display: flex; align-items: center; gap: 2px; list-style: none; margin: 0; padding: 0; }
+.nav-links a { position: relative; display: block; padding: 22px 14px; text-decoration: none; color: var(--muted); font-weight: 500; font-size: 0.9375rem; }
+.nav-links a:hover { color: var(--fg); }
+.nav-links a.active { color: var(--fg); }
+.nav-links a.active::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: -1px; height: 2px; background: var(--grad); }
+.nav-links a.btn { margin-left: 10px; padding: 10px 18px; }
+.menu-toggle { display: none; background: none; border: 1px solid var(--line); border-radius: 6px; color: var(--fg); padding: 8px 12px; cursor: pointer; font: inherit; font-size: 0.875rem; }
+@media (max-width: 760px) {
+  .menu-toggle { display: block; }
+  .nav-links { display: none; position: absolute; left: -16px; right: -16px; top: 68px; flex-direction: column; align-items: stretch; background: var(--bg); border-bottom: 1px solid var(--line); padding: 4px 16px 16px; }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 12px 4px; border-bottom: 1px solid var(--line); }
+  .nav-links a.active::after { display: none; }
+  .nav-links a.btn { margin: 12px 0 0; text-align: center; border-bottom: 0; }
+}
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 11px 22px; border-radius: 6px; border: 1px solid transparent; font: 600 0.9375rem var(--font); text-decoration: none; cursor: pointer; transition: background .15s ease, border-color .15s ease, color .15s ease; }
+.btn-primary, .nav-links a.btn-primary { background: var(--violet); color: #fff; }
+.btn-primary:hover, .nav-links a.btn-primary:hover { background: #5236D6; color: #fff; }
+.btn-ghost { background: var(--bg); color: var(--fg); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--violet); color: var(--violet); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Sections */
+.section { padding-block: 88px; }
+.section + .section { border-top: 1px solid var(--line); }
+.section-head { display: grid; gap: 14px; margin-bottom: 44px; max-width: 680px; }
+@media (max-width: 600px) { .section { padding-block: 60px; } }
+
+/* Hero */
+.hero { padding-block: 84px 92px; border-bottom: 1px solid var(--line); }
+.hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
+.hero-copy { display: grid; gap: 22px; min-width: 0; }
+@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } .hero { padding-block: 56px 64px; } }
+
+.media { position: relative; aspect-ratio: 4 / 3; max-width: 100%; border: 1px solid var(--line); border-radius: var(--radius); display: grid; place-items: center; color: var(--muted); font-size: 0.9375rem; background:
+  linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 32px 32px,
+  linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 32px 32px; }
+.media span { background: var(--bg); padding: 8px 14px; border: 1px solid var(--line); border-radius: 6px; }
+.media::before, .media::after { content: ""; position: absolute; width: 56px; height: 56px; }
+.media::before { top: -1px; left: -1px; border-top: 2px solid var(--violet); border-left: 2px solid var(--violet); border-top-left-radius: var(--radius); }
+.media::after { bottom: -1px; right: -1px; border-bottom: 2px solid var(--blue); border-right: 2px solid var(--blue); border-bottom-right-radius: var(--radius); }
+
+/* Strip */
+.strip ul { list-style: none; margin: 0; padding: 20px 0; display: flex; flex-wrap: wrap; gap: 10px 32px; justify-content: space-between; }
+.strip li { display: flex; align-items: center; gap: 10px; font-size: 0.875rem; color: var(--muted); font-weight: 500; }
+.strip li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--violet); }
+.strip li:nth-child(even)::before { background: var(--blue); }
+.strip { border-bottom: 1px solid var(--line); }
+
+/* Cards */
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.card { position: relative; border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 26px 28px; display: grid; gap: 12px; align-content: start; min-width: 0; background: var(--bg); overflow: hidden; }
+.card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--grad); }
+.icon { width: 38px; height: 38px; border-radius: 8px; border: 1px solid var(--line); display: grid; place-items: center; color: var(--violet); }
+.card p { color: var(--muted); font-size: 0.9375rem; }
+.card .tag { font-size: 0.75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); }
+.card ul { margin: 4px 0 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+.card li { font-size: 0.875rem; color: var(--muted); padding-left: 16px; position: relative; }
+.card li::before { content: ""; position: absolute; left: 0; top: .7em; width: 8px; height: 2px; background: var(--blue); }
+@media (max-width: 900px) { .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .grid-3 { grid-template-columns: 1fr; } }
+
+/* Steps */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; list-style: none; margin: 0; padding: 0; }
+.steps li { position: relative; display: grid; gap: 10px; align-content: start; padding-top: 26px; min-width: 0; }
+.steps li::before { content: ""; position: absolute; top: 4px; left: 0; right: -28px; height: 2px; background: var(--line); }
+.steps li:last-child::before { right: 0; }
+.steps li::after { content: ""; position: absolute; top: 0; left: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--violet); }
+.steps li:nth-child(n+3)::after { border-color: var(--blue); }
+.steps .num { font-size: 0.8125rem; font-weight: 600; color: var(--violet); font-variant-numeric: tabular-nums; }
+.steps p { color: var(--muted); font-size: 0.9375rem; }
+@media (max-width: 900px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } .steps li::before { right: 0; } }
+@media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+
+/* CTA */
+.cta { border: 1px solid var(--line); border-radius: var(--radius); padding: 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; position: relative; overflow: hidden; }
+.cta::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--violet), var(--blue)); }
+.cta > div { display: grid; gap: 10px; min-width: 0; }
+@media (max-width: 600px) { .cta { padding: 32px 24px; } }
+
+/* Inner page header */
+.page-head { padding-block: 72px 56px; border-bottom: 1px solid var(--line); }
+.page-head .wrap { display: grid; gap: 16px; }
+
+/* Engagement models */
+.models { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.model { border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.model.featured { border-color: var(--violet); }
+.model .tag { font-size: 0.75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); }
+.model dl { margin: 8px 0 0; display: grid; gap: 8px; }
+.model dl div { display: flex; justify-content: space-between; gap: 12px; font-size: 0.875rem; border-top: 1px solid var(--line); padding-top: 8px; }
+.model dt { color: var(--muted); } .model dd { margin: 0; font-weight: 500; text-align: right; }
+@media (max-width: 900px) { .models { grid-template-columns: 1fr; } }
+
+/* Spec rows */
+.rows { display: grid; grid-template-columns: 220px 1fr; border-top: 2px solid; border-image: var(--grad) 1; }
+.rows > div { padding: 18px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.rows .k { font-size: 0.8125rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; padding-top: 22px; }
+.rows .v { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: 0.8125rem; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+@media (max-width: 600px) { .rows { grid-template-columns: 1fr; } .rows .k { border-bottom: 0; padding-bottom: 0; } }
+
+/* About */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.two-col > * { min-width: 0; }
+.prose { display: grid; gap: 18px; color: var(--muted); max-width: 62ch; }
+.prose h2 { color: var(--fg); }
+.list-lines { border-top: 1px solid var(--line); margin-top: 16px; }
+.list-lines .item { display: grid; grid-template-columns: 40px 1fr; gap: 16px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.list-lines svg { color: var(--violet); margin-top: 2px; }
+.list-lines .item:nth-child(even) svg { color: var(--blue); }
+.list-lines p { color: var(--muted); font-size: 0.9375rem; margin-top: 6px; }
+@media (max-width: 860px) { .two-col { grid-template-columns: 1fr; gap: 40px; } }
+
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid; border-image: var(--grad) 1; }
+.fact { padding: 22px 20px 22px 0; display: grid; gap: 6px; border-bottom: 1px solid var(--line); }
+.fact .k { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.fact .v { font-weight: 600; font-size: 1.0625rem; }
+@media (max-width: 800px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Contact */
+.contact-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: start; }
+.contact-grid > * { min-width: 0; }
+form.form { position: relative; border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; display: grid; gap: 18px; overflow: hidden; }
+form.form::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--grad); }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field label { font-size: 0.875rem; font-weight: 500; }
+input, select, textarea { width: 100%; font: inherit; font-size: 0.9375rem; color: var(--fg); background: var(--soft); border: 1px solid var(--line); border-radius: 6px; padding: 11px 12px; }
+textarea { min-height: 140px; resize: vertical; }
+input:focus, select:focus, textarea:focus { outline: none; background: var(--bg); border-color: var(--violet); box-shadow: 0 0 0 3px rgba(99,71,234,.15); }
+.form-note { font-size: 0.8125rem; color: var(--muted); }
+.notice { border: 1px solid var(--line); border-left: 3px solid var(--violet); border-radius: 6px; padding: 18px 20px; display: grid; gap: 6px; }
+.aside { display: grid; gap: 24px; }
+.aside-block { display: grid; gap: 8px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.aside-block:last-child { border-bottom: 0; }
+.aside-block .k { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.faq details { border-bottom: 1px solid var(--line); padding: 14px 0; }
+.faq summary { cursor: pointer; font-weight: 500; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--violet); font-weight: 600; }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { color: var(--muted); font-size: 0.9375rem; margin-top: 8px; }
+@media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .row { grid-template-columns: 1fr; } form.form { padding: 22px; } }
+
+/* Footer */
+footer { position: relative; padding-block: 48px 36px; }
+footer::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--grad); }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; }
+.foot nav { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.foot nav a { color: var(--muted); text-decoration: none; font-size: 0.9375rem; }
+.foot nav a:hover { color: var(--violet); }
+.legal { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 0.8125rem; color: var(--muted); }
+/* Product feature */
+.product { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.product-copy { display: grid; gap: 16px; min-width: 0; }
+.product .tag { justify-self: start; font-size: 0.75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--violet); border: 1px solid var(--violet); border-radius: 999px; padding: 4px 12px; }
+.product ul { margin: 4px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.product li { color: var(--muted); padding-left: 18px; position: relative; }
+.product li::before { content: ""; position: absolute; left: 0; top: .75em; width: 10px; height: 2px; background: var(--grad); }
+@media (max-width: 860px) { .product { grid-template-columns: 1fr; gap: 32px; } }
+.media.media-logo { background: var(--bg); padding: 16px; }
+.media-logo svg { width: 100%; height: auto; display: block; }
+.brand-tech { font-weight: 400; color: var(--violet); margin-left: 3px; }
+/* Contact email */
+.email-block { display: grid; gap: 14px; justify-items: start; }
+.email-block .k { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.email-block .email { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 600; user-select: all; overflow-wrap: anywhere; }
+.email-block .notice { color: var(--muted); max-width: 60ch; margin-top: 8px; }
+</style>
+<style>body { margin: 0; } [hidden] { display: none !important; } img { max-width: 100%; }</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g-mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6347EA"/><stop offset="1" stop-color="#2B63E8"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="top-line"></div>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="BaaghaTech home">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M3 21C10 9 19 8 29 13" fill="none" stroke="url(#g-mark)" stroke-width="3.4" stroke-linecap="round"/>
+        <path d="M3 12C11 24 20 24 29 19" fill="none" stroke="url(#g-mark)" stroke-width="3.4" stroke-linecap="round" opacity=".5"/>
+      </svg>
+      <span class="brand-name">Baagha<span class="brand-tech">Tech</span></span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- HOME -->
+  <div data-page="home">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Software and App Development</span>
+          <h1>BaaghaTech</h1>
+          <p class="lead">We design and build apps and software that people rely on every day, from the first idea through launch and beyond.</p>
+          <div class="btn-row">
+            <a href="#contact" class="btn btn-primary">Contact Us</a>
+            <a href="#products" class="btn btn-ghost">Our Products</a>
+          </div>
+        </div>
+        <div class="media media-logo">
+          <svg viewBox="0 0 560 320" role="img" aria-label="Baagha Tech logo">
+            <defs>
+              <linearGradient id="rb-a" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6347EA"/><stop offset="1" stop-color="#2B63E8"/></linearGradient>
+              <linearGradient id="rb-b" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2B63E8"/><stop offset="1" stop-color="#6347EA"/></linearGradient>
+              <linearGradient id="rb-t" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6347EA"/><stop offset="1" stop-color="#2B63E8"/></linearGradient>
+              <linearGradient id="rb-fade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".18" stop-color="#fff"/><stop offset=".82" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+              <mask id="rb-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="560" height="320"><rect width="560" height="320" fill="url(#rb-fade)"/></mask>
+            </defs>
+            <g mask="url(#rb-mask)">
+            <path d="M-20,215 C110,120 250,115 340,160 C420,200 490,180 580,105 L580,150 C490,230 420,250 340,210 C250,165 110,175 -20,265 Z" fill="url(#rb-a)" opacity=".2"/>
+            <path d="M-20,120 C120,175 230,215 330,180 C430,145 480,95 580,140 L580,172 C480,132 430,186 330,216 C230,250 120,210 -20,152 Z" fill="url(#rb-b)" opacity=".26"/>
+            <path d="M-20,190 C120,110 260,130 340,175 C430,225 500,190 580,120" fill="none" stroke="url(#rb-a)" stroke-width="2.5" opacity=".9"/>
+            <path d="M-20,135 C120,190 240,230 335,195 C430,160 490,110 580,155" fill="none" stroke="url(#rb-b)" stroke-width="1.6" opacity=".75"/>
+            </g>
+            <text x="280" y="184" text-anchor="middle" font-family="'IBM Plex Sans','Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="74" letter-spacing="-1.5" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" paint-order="stroke"><tspan font-weight="700" fill="#161A33">Baagha</tspan><tspan dx="16" font-weight="400" fill="url(#rb-t)">Tech</tspan></text>
+            <text x="280" y="236" text-anchor="middle" font-family="'IBM Plex Sans','Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="5" fill="#646985" stroke="#FFFFFF" stroke-width="6" stroke-linejoin="round" paint-order="stroke">SOFTWARE &amp; APP DEVELOPMENT</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- PRODUCTS -->
+  <div data-page="products" hidden>
+    <section class="page-head">
+      <div class="wrap">
+        <span class="eyebrow">Products</span>
+        <h1>Our Products</h1>
+        <p class="lead">Apps and software designed and built by BaaghaTech.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <article class="product">
+          <div class="product-copy">
+            <span class="tag">Coming soon</span>
+            <h2>[Product name]</h2>
+            <p class="lead">[Product description.]</p>
+            <ul><li>[Feature]</li><li>[Feature]</li><li>[Feature]</li></ul>
+          </div>
+          <div class="media"><span>[Product image]</span></div>
+        </article>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ABOUT -->
+  <div data-page="about" hidden>
+    <section class="page-head">
+      <div class="wrap">
+        <span class="eyebrow">About</span>
+        <h1>Built to be useful</h1>
+        <p class="lead">BaaghaTech is a technology company that builds one project after another, each made in good will to solve real problems for real people.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap two-col">
+        <div class="prose">
+          <span class="eyebrow">Our Story</span>
+          <h2>Why we build</h2>
+          <p>Every project we take on starts with one question: will this actually help someone? When the answer is yes, we build it with care, test it thoroughly and keep improving it after launch.</p>
+          <p>We are always working on what comes next. Each release teaches us something new, and we carry that experience into the next project.</p>
+        </div>
+        <div>
+          <span class="eyebrow">What We Value</span>
+          <div class="list-lines">
+            <div class="item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg><div><h3>Useful first</h3><p>We build what people actually need, not features for their own sake.</p></div></div>
+            <div class="item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17 10 11l4 4 6-6"/><path d="M14 9h6v6"/></svg><div><h3>Always improving</h3><p>Every project makes the next one better.</p></div></div>
+            <div class="item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><div><h3>Built with care</h3><p>Clean design, reliable code and close attention to detail.</p></div></div>
+            <div class="item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><div><h3>Respect for users</h3><p>We are honest about what we make and protect the people who use it.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- CONTACT -->
+  <div data-page="contact" hidden>
+    <section class="page-head">
+      <div class="wrap">
+        <span class="eyebrow">Contact</span>
+        <h1>Get in touch</h1>
+        <p class="lead">Questions, ideas or feedback? Email us.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="email-block">
+          <span class="k">Email</span>
+          <p class="email">dcp@baaghatech.com</p>
+          <p class="notice">There is no defined time for an email response. We read every message and reply as soon as we can.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div style="display:grid;gap:10px;max-width:34ch">
+        <a class="brand" href="#home" aria-label="BaaghaTech home">
+          <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M3 21C10 9 19 8 29 13" fill="none" stroke="url(#g-mark)" stroke-width="3.4" stroke-linecap="round"/>
+        <path d="M3 12C11 24 20 24 29 19" fill="none" stroke="url(#g-mark)" stroke-width="3.4" stroke-linecap="round" opacity=".5"/>
+      </svg>
+          <span class="brand-name">Baagha<span class="brand-tech">Tech</span></span>
+        </a>
+        <p class="muted" style="font-size:.9375rem">Useful apps and software, built in good will.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="#home">Home</a><a href="#products">Products</a><a href="#about">About</a><a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="legal"><span>© 2026 BaaghaTech, operated by DevCP LLC. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var pages = Array.prototype.slice.call(document.querySelectorAll('[data-page]'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a:not(.btn)'));
+  var navList = document.getElementById('nav-links');
+  var toggle = document.getElementById('menu-toggle');
+  function route() {
+    var id = (location.hash || '#home').slice(1);
+    var target = pages.find(function (p) { return p.dataset.page === id; }) || pages[0];
+    pages.forEach(function (p) { p.hidden = p !== target; });
+    links.forEach(function (a) {
+      var on = a.getAttribute('href') === '#' + target.dataset.page;
+      a.classList.toggle('active', on);
+      if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+    navList.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', route);
+  route();
+  toggle.addEventListener('click', function () {
+    var open = navList.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+})();
+</script>
+
+</body>
+</html>
