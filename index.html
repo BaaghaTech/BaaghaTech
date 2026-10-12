@@ -220,6 +220,13 @@ footer::before { content: ""; position: absolute; top: 0; left: 0; right: 0; hei
 .email-block .k { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
 .email-block .email { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 600; user-select: all; overflow-wrap: anywhere; }
 .email-block .notice { color: var(--muted); max-width: 60ch; margin-top: 8px; }
+/* Legal / privacy prose */
+.prose ul { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 8px; }
+.prose li { color: var(--muted); font-size: 0.9375rem; }
+.prose a { color: var(--violet); text-decoration: none; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.prose a:hover { border-color: var(--violet); }
+.legal a { color: var(--muted); text-decoration: none; }
+.legal a:hover { color: var(--violet); }
 </style>
 <style>body { margin: 0; } [hidden] { display: none !important; } img { max-width: 100%; }</style>
 </head>
@@ -369,6 +376,52 @@ footer::before { content: ""; position: absolute; top: 0; left: 0; right: 0; hei
       </div>
     </section>
   </div>
+
+  <!-- PRIVACY -->
+  <div data-page="privacy" hidden>
+    <section class="page-head">
+      <div class="wrap">
+        <span class="eyebrow">Legal</span>
+        <h1>Privacy Policy</h1>
+        <p class="lead">Effective Date: October 12, 2026 &nbsp;·&nbsp; Company: DevCP LLC &nbsp;·&nbsp; App: BaaghaTech</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="prose" style="max-width:74ch">
+          <p>DevCP LLC ("we," "our," or "us") respects your privacy. This Privacy Policy explains how our mobile application BaaghaTech handles information when you download, install, and use it.</p>
+
+          <h2>1. Information Collection and Use</h2>
+          <p>We are committed to protecting your privacy. BaaghaTech is designed as a standalone educational study tool and does not collect, store, transmit, or share any personal data, user analytics, or device identifiers.</p>
+          <ul>
+            <li><strong>No Personal Data Collected:</strong> We do not require you to create an account, log in, or provide personal details (such as your name, email address, phone number, or location) to use the app.</li>
+            <li><strong>No Health or Usage Tracking:</strong> We do not track how you interact with the study materials, nor do we collect any health, medical, or diagnostic information.</li>
+          </ul>
+
+          <h2>2. Third-Party Services and Analytics</h2>
+          <p>Because our app is purely educational and static in nature:</p>
+          <ul>
+            <li>We do not utilize third-party analytics SDKs, tracking pixels, or advertising networks.</li>
+            <li>No data is transmitted to third-party servers or external databases.</li>
+          </ul>
+
+          <h2>3. Children's Privacy</h2>
+          <p>Our app is designed for general educational use. Because we do not collect any personal information from any user—including children under the age of 13—our application complies fully with the Children's Online Privacy Protection Act (COPPA) and equivalent global standards.</p>
+
+          <h2>4. Changes to This Privacy Policy</h2>
+          <p>We may update our Privacy Policy from time to time. Any changes will be posted on this page with an updated "Effective Date." You are advised to review this Privacy Policy periodically for any changes.</p>
+
+          <h2>5. Contact Us</h2>
+          <p>If you have any questions or concerns about this Privacy Policy or our privacy practices, please contact us at:</p>
+          <ul>
+            <li>Email: <a href="mailto:dcp@baaghatech.com">dcp@baaghatech.com</a></li>
+            <li>Website: <a href="https://www.baaghatech.com">https://www.baaghatech.com</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
 </main>
 
 <footer>
@@ -388,7 +441,7 @@ footer::before { content: ""; position: absolute; top: 0; left: 0; right: 0; hei
         <a href="#home">Home</a><a href="#products">Products</a><a href="#about">About</a><a href="#contact">Contact</a>
       </nav>
     </div>
-    <div class="legal"><span>© 2026 BaaghaTech, operated by DevCP LLC. All rights reserved.</span></div>
+    <div class="legal"><span>© 2026 BaaghaTech, operated by DevCP LLC. All rights reserved.</span><a href="#privacy">Privacy Policy</a></div>
   </div>
 </footer>
 
